@@ -11,5 +11,5 @@
 		- 参与过学校的**gdutDays**小程序后台开发，现为维护人员之一
 	- 与团队成员一起打过**华为，软件测试**等比赛
 	- 曾使用lua脚本手写过waf防火墙，可以防住并记录部分常见网络攻击
-	- 不断学习springboot，微服务，redis，mysql，mq，netty等后台技术
+	- 不断学习springboot，微服务，redis，mq，netty等后台技术
 	- 正在准备今年的蓝桥杯比赛
