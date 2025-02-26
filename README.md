@@ -1,16 +1,15 @@
-## Hi there 👋
-
-<!--
-**Xb2555/Xb2555** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-
-Here are some ideas to get you started:
-
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+个人介绍
+- **兴趣爱好**
+	- 打游戏
+	- 健身
+	- 跑步
+	- 看动漫
+- **学习经历**
+	- 目前是**QG后台组**的一名成员
+	- 参与过大大小小的项目开发
+		- 寒假参与了工作室的**招新程序开发**，主要负责强实时性的ws服务器开发和大数据更改查询的接口开发
+		- 参与过学校的**gdutDays**小程序后台开发，现为维护人员之一
+	- 与团队成员一起打过**华为，软件测试**等比赛
+	- 曾使用lua脚本手写过waf防火墙，可以防住并记录部分常见网络攻击
+	- 不断学习springboot，微服务，redis，mysql，mq，netty等后台技术
+	- 正在准备今年的蓝桥杯比赛
