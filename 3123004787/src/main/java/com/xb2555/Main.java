@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -41,5 +42,15 @@ public class Main {
             words.add(token.word.toLowerCase());
         }
         return words;
+    }
+
+    // 构建词频向量
+    private static void buildVector(List<String> words, Map<String, int[]> vectorMap, int index) {
+        for (String word : words) {
+            if (!vectorMap.containsKey(word)) {
+                vectorMap.put(word, new int[2]);
+            }
+            vectorMap.get(word)[index]++;
+        }
     }
 }
