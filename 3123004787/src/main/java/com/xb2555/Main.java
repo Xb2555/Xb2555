@@ -1,5 +1,9 @@
 package com.xb2555;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class Main {
     public static void main(String[] args) {
         if (args.length != 3) {
@@ -10,5 +14,17 @@ public class Main {
         String originalPath = args[0];
         String plagiarizedPath = args[1];
         String outputPath = args[2];
+    }
+
+    // 读取文件内容
+    private static String readFile(String filePath) throws IOException {
+        StringBuilder content = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                content.append(line).append("\n");
+            }
+        }
+        return content.toString().trim();
     }
 }
