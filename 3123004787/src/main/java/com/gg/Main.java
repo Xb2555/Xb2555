@@ -1,8 +1,15 @@
 package com.gg;
 
+import com.huaban.analysis.jieba.JiebaSegmenter;
+import com.huaban.analysis.jieba.SegToken;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -30,5 +37,25 @@ public class Main {
             }
         }
         return content.toString().trim();
+    }
+
+    // 中文分词
+    private static List<String> segmentWords(JiebaSegmenter segmenter, String text) {
+        List<SegToken> tokens = segmenter.process(text, JiebaSegmenter.SegMode.SEARCH);
+        List<String> words = new ArrayList<>();
+        for (SegToken token : tokens) {
+            words.add(token.word.toLowerCase());
+        }
+        return words;
+    }
+
+    // 构建词频向量
+    private static void buildVector(List<String> words, Map<String, int[]> vectorMap, int index) {
+        for (String word : words) {
+            if (!vectorMap.containsKey(word)) {
+                vectorMap.put(word, new int[2]);
+            }
+            vectorMap.get(word)[index]++;
+        }
     }
 }
