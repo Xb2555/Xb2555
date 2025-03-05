@@ -3,9 +3,8 @@ package com.xb2555;
 import com.huaban.analysis.jieba.JiebaSegmenter;
 import com.huaban.analysis.jieba.SegToken;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -83,5 +82,14 @@ public class Main {
             return 0.0; // 避免除以零
         }
         return dotProduct / (Math.sqrt(norm1) * Math.sqrt(norm2));
+    }
+
+    // 写入结果文件
+    private static void writeResult(String outputPath, double similarity) throws IOException {
+        DecimalFormat df = new DecimalFormat("0.00");
+        String result = df.format(similarity * 100) + "%";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputPath))) {
+            writer.write(result);
+        }
     }
 }
