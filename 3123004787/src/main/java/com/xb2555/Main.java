@@ -20,6 +20,21 @@ public class Main {
         String originalPath = args[0];
         String plagiarizedPath = args[1];
         String outputPath = args[2];
+
+        try {
+            // 读取文件内容
+            String originalText = readFile(originalPath);
+            String plagiarizedText = readFile(plagiarizedPath);
+
+            // 计算相似度
+            double similarity = calculateCosineSimilarity(originalText, plagiarizedText);
+
+            // 输出结果
+            writeResult(outputPath, similarity);
+
+        } catch (IOException e) {
+            System.err.println("文件读写错误: " + e.getMessage());
+        }
     }
 
     // 读取文件内容
