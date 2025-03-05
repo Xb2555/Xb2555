@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -52,5 +53,35 @@ public class Main {
             }
             vectorMap.get(word)[index]++;
         }
+    }
+
+    // 计算余弦相似度
+    private static double calculateCosineSimilarity(String text1, String text2) {
+        // 中文分词
+        JiebaSegmenter segmenter = new JiebaSegmenter();
+        List<String> words1 = segmentWords(segmenter, text1);
+        List<String> words2 = segmentWords(segmenter, text2);
+
+        // 构建词频向量
+        Map<String, int[]> vectorMap = new HashMap<>();
+        buildVector(words1, vectorMap, 0);
+        buildVector(words2, vectorMap, 1);
+
+        // 计算点积和模长
+        double dotProduct = 0.0;
+        double norm1 = 0.0;
+        double norm2 = 0.0;
+
+        for (Map.Entry<String, int[]> entry : vectorMap.entrySet()) {
+            int[] counts = entry.getValue();
+            dotProduct += counts[0] * counts[1];
+            norm1 += Math.pow(counts[0], 2);
+            norm2 += Math.pow(counts[1], 2);
+        }
+
+        if (norm1 == 0 || norm2 == 0) {
+            return 0.0; // 避免除以零
+        }
+        return dotProduct / (Math.sqrt(norm1) * Math.sqrt(norm2));
     }
 }
