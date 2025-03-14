@@ -38,7 +38,7 @@ public class Main {
     }
 
     // 读取文件内容
-    private static String readFile(String filePath) throws IOException {
+    public static String readFile(String filePath) throws IOException {
         StringBuilder content = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -50,7 +50,7 @@ public class Main {
     }
 
     // 中文分词
-    private static List<String> segmentWords(JiebaSegmenter segmenter, String text) {
+    public static List<String> segmentWords(JiebaSegmenter segmenter, String text) {
         List<SegToken> tokens = segmenter.process(text, JiebaSegmenter.SegMode.SEARCH);
         List<String> words = new ArrayList<>();
         for (SegToken token : tokens) {
@@ -60,7 +60,7 @@ public class Main {
     }
 
     // 构建词频向量
-    private static void buildVector(List<String> words, Map<String, int[]> vectorMap, int index) {
+    public static void buildVector(List<String> words, Map<String, int[]> vectorMap, int index) {
         for (String word : words) {
             if (!vectorMap.containsKey(word)) {
                 vectorMap.put(word, new int[2]);
@@ -70,7 +70,7 @@ public class Main {
     }
 
     // 计算余弦相似度
-    private static double calculateCosineSimilarity(String text1, String text2) {
+    public static double calculateCosineSimilarity(String text1, String text2) {
         // 中文分词
         JiebaSegmenter segmenter = new JiebaSegmenter();
         List<String> words1 = segmentWords(segmenter, text1);
@@ -100,7 +100,7 @@ public class Main {
     }
 
     // 写入结果文件
-    private static void writeResult(String outputPath, double similarity) throws IOException {
+    public static void writeResult(String outputPath, double similarity) throws IOException {
         DecimalFormat df = new DecimalFormat("0.00");
         String result = df.format(similarity * 100) + "%";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputPath))) {
