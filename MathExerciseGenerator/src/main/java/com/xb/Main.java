@@ -19,6 +19,11 @@ public class Main {
             int numberOfExercises = Integer.parseInt(args[1]);
             int range = Integer.parseInt(args[3]);
             generateExercises(numberOfExercises, range);
+        }else if (args[0].equals("-e") && args.length == 4 && args[2].equals("-a")) {
+            // 判断答案模式：-e <题目文件> -a <答案文件>
+            String exerciseFile = args[1];
+            String answerFile = args[3];
+            gradeAnswers(exerciseFile, answerFile);
         }else{
             printHelp();
         }
