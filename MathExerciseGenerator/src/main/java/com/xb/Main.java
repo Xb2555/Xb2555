@@ -3,14 +3,59 @@ package com.xb;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Main {
     // 随机数生成器，用于生成随机数和运算符
     private static final Random random = new Random();
     public static void main(String[] args) {
+        // 如果没有传入参数，打印帮助信息并退出
+        if (args.length == 0) {
+            printHelp();
+            return;
+        }
 
+        // 解析命令行参数
+        if (args[0].equals("-n") && args.length == 4 && args[2].equals("-r")) {
+            // 生成题目模式：-n <题目数量> -r <数值范围>
+            int numberOfExercises = Integer.parseInt(args[1]);
+            int range = Integer.parseInt(args[3]);
+            generateExercises(numberOfExercises, range);
+        }
+    }
+
+    // 生成指定数量的题目
+    private static void generateExercises(int numberOfExercises, int range) {
+        // 用于存储已生成的题目，避免重复
+        Set<String> exercises = new HashSet<>();
+        // 存储题目列表
+        List<String> exerciseList = new ArrayList<>();
+        // 存储答案列表
+        List<String> answerList = new ArrayList<>();
+
+        // 生成题目，直到达到指定数量
+        while (exerciseList.size() < numberOfExercises) {
+            String exercise = generateExercise(range);
+            // 检查题目是否重复
+            if (!exercises.contains(exercise)) {
+                exercises.add(exercise);
+                exerciseList.add(exercise);
+                // 计算题目的答案并保存
+                answerList.add(calculateAnswer(exercise));
+            }
+        }
+
+        // 将题目和答案保存到文件中
+        saveToFile("Exercises.txt", exerciseList);
+        saveToFile("Answers.txt", answerList);
+    }
+
+
+    // 打印帮助信息
+    private static void printHelp() {
+        System.out.println("使用方法:");
+        System.out.println("  生成题目: Myapp.jar -n <要生成的题目数> -r <随机数>");
+        System.out.println("  检查答案: Myapp.exe -e <题目文件>.txt -a <答案文件>.txt");
     }
 
     // 生成一个随机的四则运算题目
