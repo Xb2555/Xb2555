@@ -25,4 +25,20 @@ public class Main {
         char[] operators = {'+', '-', '*', '/'};
         return operators[random.nextInt(operators.length)];
     }
+
+    // 简化分数形式
+    private static String simplifyFraction(int numerator, int denominator) {
+        // 计算最大公约数
+        int gcd = gcd(numerator, denominator);
+        // 返回简化后的分数，例如 "3/4"
+        return (numerator / gcd) + "/" + (denominator / gcd);
+    }
+
+    // 计算两个数的最大公约数（GCD）
+    private static int gcd(int a, int b) {
+        if (b == 0) {
+            return a;
+        }
+        return gcd(b, a % b);
+    }
 }
