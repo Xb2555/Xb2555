@@ -1,8 +1,6 @@
 package com.xb;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 public class Main {
@@ -136,6 +134,61 @@ public class Main {
                 writer.write(line);
                 writer.newLine();
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // 判断答案的正确性
+    private static void gradeAnswers(String exerciseFile, String answerFile) {
+        // 读取题目文件和答案文件
+        List<String> exercises = readFile(exerciseFile);
+        List<String> answers = readFile(answerFile);
+
+        // 存储正确和错误题目的编号
+        List<Integer> correctIndices = new ArrayList<>();
+        List<Integer> wrongIndices = new ArrayList<>();
+
+        // 遍历每个题目，判断答案是否正确
+        for (int i = 0; i < exercises.size(); i++) {
+            String exercise = exercises.get(i);
+            // 计算题目的正确答案
+            String correctAnswer = calculateAnswer(exercise);
+            // 获取用户提供的答案
+            String userAnswer = answers.get(i);
+
+            // 比较答案是否正确
+            if (correctAnswer.equals(userAnswer)) {
+                correctIndices.add(i + 1); // 题目编号从1开始
+            } else {
+                wrongIndices.add(i + 1);
+            }
+        }
+
+        // 将统计结果保存到文件中
+        saveGradeToFile(correctIndices, wrongIndices);
+    }
+
+    // 从文件中读取内容
+    private static List<String> readFile(String fileName) {
+        List<String> lines = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                lines.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return lines;
+    }
+
+    // 将统计结果保存到 Grade.txt 文件中
+    private static void saveGradeToFile(List<Integer> correctIndices, List<Integer> wrongIndices) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Grade.txt"))) {
+            writer.write("Correct: " + correctIndices.size() + " " + correctIndices);
+            writer.newLine();
+            writer.write("Wrong: " + wrongIndices.size() + " " + wrongIndices);
         } catch (IOException e) {
             e.printStackTrace();
         }
