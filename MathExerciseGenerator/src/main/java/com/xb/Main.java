@@ -1,5 +1,9 @@
 package com.xb;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
 import java.util.Random;
 
 public class Main {
@@ -63,6 +67,18 @@ public class Main {
                 return simplifyFraction(num1, num2);
             default:
                 return "0";
+        }
+    }
+
+    // 将列表中的内容保存到文件中
+    private static void saveToFile(String fileName, List<String> lines) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            for (String line : lines) {
+                writer.write(line);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
