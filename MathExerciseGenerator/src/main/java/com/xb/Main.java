@@ -21,6 +21,8 @@ public class Main {
             int numberOfExercises = Integer.parseInt(args[1]);
             int range = Integer.parseInt(args[3]);
             generateExercises(numberOfExercises, range);
+        }else{
+            printHelp();
         }
     }
 
