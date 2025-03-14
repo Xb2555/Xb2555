@@ -41,4 +41,28 @@ public class Main {
         }
         return gcd(b, a % b);
     }
+
+    // 计算题目的答案
+    private static String calculateAnswer(String exercise) {
+        // 将题目字符串拆分为数字和运算符
+        String[] parts = exercise.split(" ");
+        int num1 = Integer.parseInt(parts[0]);
+        char operator = parts[1].charAt(0);
+        int num2 = Integer.parseInt(parts[2]);
+
+        // 根据运算符计算结果
+        switch (operator) {
+            case '+':
+                return String.valueOf(num1 + num2);
+            case '-':
+                return String.valueOf(num1 - num2);
+            case '*':
+                return String.valueOf(num1 * num2);
+            case '/':
+                // 如果是除法，返回简化后的分数形式
+                return simplifyFraction(num1, num2);
+            default:
+                return "0";
+        }
+    }
 }
