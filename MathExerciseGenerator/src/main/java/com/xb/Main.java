@@ -67,6 +67,10 @@ public class Main {
         int num2 = random.nextInt(range);
         // 随机选择一个运算符
         char operator = getRandomOperator();
+        // 如果运算符是除法，确保第二个数不为零
+        if (operator == '/' && num2 == 0) {
+            num2 = random.nextInt(range - 1) + 1; // 确保 num2 不为零
+        }
         // 返回题目字符串，例如 "3 + 5 ="
         return num1 + " " + operator + " " + num2 + " =";
     }
@@ -79,6 +83,10 @@ public class Main {
 
     // 简化分数形式
     private static String simplifyFraction(int numerator, int denominator) {
+        // 检查分母是否为零
+        if (denominator == 0) {
+            return "Error: Division by zero";
+        }
         // 计算最大公约数
         int gcd = gcd(numerator, denominator);
         // 返回简化后的分数，例如 "3/4"
@@ -111,6 +119,10 @@ public class Main {
                 return String.valueOf(num1 * num2);
             case '/':
                 // 如果是除法，返回简化后的分数形式
+                // 检查除数为零的情况
+                if (num2 == 0) {
+                    return "Error: Division by zero";
+                }
                 return simplifyFraction(num1, num2);
             default:
                 return "0";
